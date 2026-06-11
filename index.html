@@ -1,0 +1,63 @@
+<html>
+<title>Google Sheets json endpoint V4</title>
+<author>Mike Steelson</author>
+<style>
+table {border-collapse: collapse;}
+th,td{border: 1px solid black;}
+</style>
+<body>
+<div id="json">json here</div>
+<script>
+const id = '1vF0D_WJXH5RUC7liF3fbcZCrLvre_xEGFGTD3FDYq1U';
+const gid = '0';
+const url = `https://docs.google.com/spreadsheets/d/${id}/gviz/tq?tqx=out:json&tq&gid=${gid}`;
+
+// Fetch the GViz response, parse it via getEndpointJson and populate the page
+fetch(url)
+  .then(response => response.text())
+  .then(text => {
+    document.getElementById('json').innerHTML = getEndpointJson(text);
+  })
+  .catch(err => {
+    console.error(err);
+    document.getElementById('json').textContent = 'Erro ao carregar os dados';
+  });
+
+// Parse the Google Visualization GViz text and return an HTML table string
+function getEndpointJson(gvizText){
+  // Expecting something like: google.visualization.Query.setResponse({...});
+  const startToken = 'setResponse(';
+  const start = gvizText.indexOf(startToken);
+  if(start === -1) return 'Formato de resposta inesperado';
+  const jsonText = gvizText.substring(start + startToken.length, gvizText.lastIndexOf(');'));
+  let resp;
+  try{
+    resp = JSON.parse(jsonText);
+  }catch(e){
+    console.error('Erro ao parsear JSON do endpoint', e);
+    return 'Erro ao parsear dados';
+  }
+
+  const tableObj = resp.table;
+  if(!tableObj) return 'Nenhuma tabela encontrada';
+
+  let html = '<table><tr>';
+  tableObj.cols.forEach(col => html += `<th>${col.label || ''}</th>`);
+  html += '</tr>';
+
+  tableObj.rows.forEach(row => {
+    html += '<tr>';
+    row.c.forEach(cell => {
+      const val = cell ? (cell.f !== undefined && cell.f !== null ? cell.f : (cell.v !== undefined ? cell.v : '')) : '';
+      html += `<td>${val}</td>`;
+    });
+    html += '</tr>';
+  });
+
+  html += '</table>';
+  return html;
+}
+
+</script>
+
+</html>
