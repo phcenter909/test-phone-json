@@ -295,7 +295,7 @@ function renderProducts(products) {
   grid.innerHTML = products.map(product => `
     <div class="col-12 col-md-6 col-lg-4">
       <div class="card product-card shadow-sm h-100">
-        <img src="${product.image}" class="product-image" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';">
+        <img src="${product.image}" class="product-image object-fit-contain" alt="${product.name}" onerror="this.onerror=null; this.src='https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=600&q=80';">
         <div class="card-body d-flex flex-column">
           <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
             <h5 class="card-title mb-0">${product.name}</h5>
