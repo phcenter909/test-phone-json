@@ -7,8 +7,6 @@
     --gray-blue: #8A91A6;
 }
 
-
-/* Logo Header */
 .logo-header {
     height: 200px;
     width: auto;
@@ -18,7 +16,6 @@
     margin-right: auto;
 }
 
-/* Estilos personalizados para Phone House */
 body {
     background-color: var(--primary);
     color: var(--dark-navy);
@@ -48,7 +45,8 @@ header h1, header p {
 }
 
 .product-image {
-    height: 113px;
+    height: 180px;
+    width: 100%;
     object-fit: cover;
     border-bottom: 1px solid var(--gray-blue);
 }
@@ -102,7 +100,6 @@ header h1, header p {
     border-color: var(--dark-navy);
 }
 
-/* Inputs e Selects */
 .form-control,
 .form-select {
     background-color: var(--primary);
@@ -122,7 +119,6 @@ header h1, header p {
     color: var(--gray-blue);
 }
 
-/* Footers e Cards */
 footer {
     background-color: var(--primary) !important;
     border-top: 2px solid var(--dark-navy);
@@ -140,40 +136,10 @@ footer {
     font-weight: 600;
 }
 
-/* Texto e Cores */
 .text-muted {
     color: var(--gray-blue) !important;
 }
 
 .text-dark {
     color: var(--dark-navy) !important;
-}
-
-/* Remove Dark Theme Styles */
-body.dark-theme {
-    background-color: var(--primary);
-    color: var(--dark-navy);
-}
-
-body.dark-theme .bg-white {
-    background-color: var(--primary) !important;
-    color: var(--dark-navy) !important;
-}
-
-body.dark-theme .bg-light {
-    background-color: var(--primary) !important;
-}
-
-body.dark-theme .text-dark {
-    color: var(--dark-navy) !important;
-}
-
-body.dark-theme .text-muted {
-    color: var(--gray-blue) !important;
-}
-
-body.dark-theme .card {
-    background-color: var(--primary);
-    border-color: var(--gray-blue);
-    color: var(--dark-navy);
 }
